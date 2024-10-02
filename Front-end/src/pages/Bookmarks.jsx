@@ -4,7 +4,7 @@ import "../styles/Bookmarks.css";
 import homeIcon from "../assets/homeIcon.png";
 import Story from '../components/Story';
 import { useNavigate } from 'react-router-dom';
-import AddStory from '../components/addStory';
+import AddStory from '../components/AddStory';
 
 const Bookmarks = (user, setUser) => {
   const [showStory, setShowStory] = useState(false);
