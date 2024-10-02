@@ -1,0 +1,211 @@
+.storyCon {
+    height: 100vh;
+    width: 100vw;
+    background-color: #000000CF;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.story {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    width: 16rem;
+    height: 28rem;
+    object-fit: contain;
+    border-radius: 10px;
+    background-size: 'cover';
+    background-position: 'center';
+    box-shadow: 0px 4px 40px 0px #D9D9D94D;
+}
+
+.story.active {
+    display: block;
+    position: relative;
+    background-size: 'cover';
+    background-position: 'center';
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.next {
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.dot {
+    cursor: pointer;
+    height: 3.5px;
+    width: 2.1rem;
+    background-color: #D9D9D980;
+    transition: background-color 0.6s ease;
+}
+
+.active,
+.dot:hover {
+    background-color: #FFFFFF;
+}
+
+.dotCon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from {
+        opacity: .4;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.storyTopBtnCon {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.7rem;
+}
+
+.storyBottomBtnCon {
+    display: flex;
+    justify-content: center;
+    gap: 3.5rem;
+    margin-top: 0.4rem;
+    padding: 0.4rem 0.7rem 0 0.7rem;
+}
+
+.storyHeading {
+    color: #FFFFFF;
+    font-family: DM Sans;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.2rem;
+    margin-bottom: 0.3rem;
+}
+
+.storyDescription {
+    color: #FFFFFF;
+    font-family: DM Sans;
+    font-size: 0.65rem;
+    font-weight: 700;
+    line-height: 0.9rem;
+}
+
+.storyTextCon {
+    padding: 0 1rem 0 1rem;
+}
+
+.storyBottomCon {
+    padding-bottom: 1rem;
+    padding-top: 1.5rem;
+    border-radius: 0 0 10px 10px;
+    position: relative;
+    background: linear-gradient(0deg, #000000 59.6%, rgba(0, 0, 0, 0) 102.31%);
+}
+
+.downloadMessageCon {
+    position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
+    bottom: 2.5rem;
+    border: 0.57px solid #4C4C4C;
+    background-color: #202020;
+    border-radius: 4.5px;
+}
+
+.downloadMessageCon>p {
+    color: #FFFFFF;
+    font-family: DM Sans;
+    font-size: 0.5rem;
+    font-weight: 400;
+    line-height: 14.31px;
+    padding: 0 0.3rem;
+}
+
+.shareMessageCon {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    top: 50%;
+    background-color: #FFFFFF;
+    border-radius: 39px;
+    width: 14rem;
+}
+
+.shareMessageCon>p {
+    color: #FF0000;
+    font-family: DM Sans;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1rem;
+    padding: 0.8rem 1.5rem;
+}
+
+.storyTopCon {
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+    border-radius: 10px 10px 0 0;
+    background: linear-gradient(180deg, #000000 59.6%, rgba(0, 0, 0, 0) 102.31%);
+}
+
+.storyBottomBtnCon>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    padding-left: 1rem;
+}
+
+.storyBottomBtnCon>div>span {
+    color: #FFFFFF;
+    font-family: DM Sans;
+    font-size: 0.7rem;
+    font-weight: 700;
+    line-height: 0.9rem;
+}
+
+.storyBottomBtnCon>button {
+    height: 1.5rem;
+}
+
+.storyBottomBtnCon>div>button {
+    height: 1.5rem;
+}
+
+.storyBottomBtnCon>div>button>img {
+    height: 1.5rem;
+}
+
+.storyBottomBtnCon>button>img {
+    height: 1.4rem;
+}

@@ -1,0 +1,99 @@
+.navbar {
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2rem;
+    padding-right: 2.5rem;
+    box-shadow: 0px 4px 15px 0px #00000026;
+    position: fixed;
+    z-index: 1;
+    background-color: #FFFFFF;
+}
+
+.registerBtn {
+    background-color: #FF7373;
+    height: 2.6rem;
+    width: 8.2rem;
+    border-radius: 20px;
+    color: #FFFFFF;
+    font-family: DM Sans;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.3rem;
+}
+
+.signInBtn {
+    background-color: #73ABFF;
+    height: 2.6rem;
+    width: 8rem;
+    border-radius: 20px;
+    color: #FFFFFF;
+    font-family: DM Sans;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.3rem;
+}
+
+.bookmarksBtn {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.bookmarksBtn>img {
+    height: 1.3rem;
+}
+
+.profilePhotoCon {
+    height: 2.8rem;
+    width: 2.8rem;
+    border-radius: 50%;
+    background-color: grey;
+}
+
+.profilePhotoCon>img {
+    height: 2.8rem;
+    width: 2.8rem;
+    object-fit: fill;
+    border-radius: 50%;
+}
+
+.hamburgerBtn {
+    height: 1.2rem;
+    width: 1.5rem;
+}
+
+.hamburgerBtn>img {
+    height: 1.2rem;
+    width: 1.5rem;
+}
+
+.navbar #hamburgerContent {
+    display: none;
+    position: fixed;
+    right: 0;
+    top: 10vh;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    background-color: #FFFFFF;
+    height: 8.2rem;
+    width: 14.5rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.1rem;
+}
+
+#hamburgerContent>p {
+    color: #000000;
+    font-family: DM Sans;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.1rem;
+}
+
+.navbar a.icon {
+    display: block;
+}

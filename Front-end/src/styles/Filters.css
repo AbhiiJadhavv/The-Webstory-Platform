@@ -1,0 +1,109 @@
+.filtersCon {
+    width: 100vw;
+    max-width: 100%;
+    display: flex;
+    padding: 13vh 1rem 2rem 1rem;
+}
+
+.filters {
+    display: flex;
+    overflow-x: auto;
+    gap: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.filters::-webkit-scrollbar {
+    display: none;
+}
+
+.filter {
+    height: 11rem;
+    min-width: 11rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 36px;
+    margin-right: 0.5rem;
+    box-shadow: inset 0 0 10rem #00000099;
+    background-size: cover;
+    cursor: pointer;
+    transition: 0.2s all;
+}
+
+.filter.active {
+    border: 5px solid #00ACD2;
+}
+
+.filter:hover {
+    transform: scale(1.03, 1.01);
+}
+
+.filter>p {
+    color: #FFFFFF;
+    font-family: DM Sans;
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.4rem;
+}
+
+.all {
+    background-image: url("../assets/allImage.png");
+}
+
+.food {
+    background-image: url("../assets/foodImage.png");
+}
+
+.health {
+    background-image: url("../assets/healthImage.jpg");
+}
+
+.travel {
+    background-image: url("../assets/travelImage.webp");
+}
+
+.movies {
+    background-image: url("../assets/movieImage.jpg");
+}
+
+.education {
+    background-image: url("../assets/educationImage.jpg");
+}
+
+@media (max-width: 780px) {
+
+    .filters {
+        display: flex;
+        overflow-x: auto;
+        gap: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .filter {
+        height: 5rem;
+        min-width: 8rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+        justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+        margin-right: 0.5rem;
+        box-shadow: inset 0 0 10rem #00000099;
+        background-size: cover;
+        cursor: pointer;
+        transition: 0.2s all;
+    }
+
+    .filter>p {
+        color: #FFFFFF;
+        font-family: DM Sans;
+        font-size: 1.1rem;
+        font-weight: 700;
+        line-height: 1.1rem;
+    }
+}

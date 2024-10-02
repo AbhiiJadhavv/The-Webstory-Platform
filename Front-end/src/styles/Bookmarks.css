@@ -1,0 +1,51 @@
+.homeBtn {
+    height: 1.7rem;
+    position: absolute;
+    left: 11vw;
+    top: 16vh;
+}
+
+.homeBtn>img {
+    height: 1.7rem;
+}
+
+.bookmarksCon {
+    width: 100vw;
+    max-width: 100%;
+    display: flex;
+    padding: 13vh 1rem 2rem 1rem;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.bookmarks {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 6.5rem;
+    row-gap: 4rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.yourBookmarksPara {
+    color: #000000;
+    font-family: DM Sans;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.noBookmarksPara {
+    margin-top: 6rem;
+    margin-bottom: 5.5rem;
+    color: #8E8E8E;
+    font-family: DM Sans;
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+}
