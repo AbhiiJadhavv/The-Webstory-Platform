@@ -11,7 +11,7 @@ const YourStories = ({ user, setShowStory, setSelectedStory }) => {
     const fetchUserStories = async () => {
       if (user) {
         try {
-          const response = await axios.get(`http://localhost:8000/api/v1/story/stories/user/${user._id}`, {
+          const response = await axios.get(`https://web-story-platform-by-abhishek.onrender.com/api/v1/story/stories/user/${user._id}`, {
             headers: {
               Authorization: `Bearer ${user.token}`,
             },
