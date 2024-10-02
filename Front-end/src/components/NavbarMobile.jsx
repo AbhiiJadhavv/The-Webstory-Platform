@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/NavbarMobile.css";
-import profilePhoto from "../assets/profilePhoto.webp";
+import profilePhoto from "../assets/ProfilePhoto.webp";
 import hamburgerImg from "../assets/HamburgerImg.png";
 import bookmarksImg from "../assets/bookmarksImg.png";
 import { useNavigate } from 'react-router-dom'
