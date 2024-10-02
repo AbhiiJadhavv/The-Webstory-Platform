@@ -13,7 +13,7 @@ import EducationStories from '../components/EducationStories';
 import { useUser } from '../UserContext';
 import YourStories from '../components/YourStories';
 import Story from '../components/Story';
-import AddStory from '../components/addStory';
+import AddStory from '../components/AddStory';
 import axios from "axios";
 import "../styles/HomePage.css";
 import NavbarMobile from '../components/NavbarMobile';
