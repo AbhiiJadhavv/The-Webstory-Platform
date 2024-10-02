@@ -90,7 +90,7 @@ const AddStory = ({ setAddStory }) => {
 
       console.log('Payload being sent:', payload);
 
-      const response = await fetch('http://localhost:8000/api/v1/story/stories', {
+      const response = await fetch('https://web-story-platform-by-abhishek.onrender.com/api/v1/story/stories', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
