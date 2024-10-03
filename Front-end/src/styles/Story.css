@@ -209,3 +209,83 @@
 .storyBottomBtnCon>button>img {
     height: 1.4rem;
 }
+
+@media (max-width: 780px) {
+    .storyCon {
+        height: 100vh;
+        width: 100vw;
+        background-color: #000000CF;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .story {
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        object-fit: contain;
+        border-radius: 10px;
+        background-size: 'cover';
+        background-position: 'center';
+        box-shadow: 0px 4px 40px 0px #D9D9D94D;
+    }
+
+    .story.active {
+        display: block;
+        position: relative;
+        background-size: 'cover';
+        background-position: 'center';
+    }
+
+    .prev,
+    .next {
+        cursor: pointer;
+        width: auto;
+        margin-top: -22px;
+        padding: 16px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        position: absolute;
+    }
+
+    .prev {
+        left: 0;
+        z-index: 2;
+    }
+
+    .next {
+        border-radius: 3px 0 0 3px;
+        right: 0;
+    }
+
+    .prev:hover,
+    .next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .dot {
+        cursor: pointer;
+        height: 3.5px;
+        width: 2.1rem;
+        background-color: #D9D9D980;
+        transition: background-color 0.6s ease;
+    }
+
+    .active,
+    .dot:hover {
+        background-color: #FFFFFF;
+    }
+
+}
