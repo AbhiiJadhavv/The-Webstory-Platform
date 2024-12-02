@@ -151,3 +151,144 @@
 .postStoryBtn {
     background-color: #7EFF73;
 }
+
+.addStoryMobile {
+    height: 26rem;
+    width: 18rem;
+    padding: 2rem 1rem 1.8rem 1rem;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0px 4px 30px 0px #FFFFFF40;
+    text-align: center;
+    position: relative;
+}
+
+.addStoryHeadingMobile {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.addStoryHeadingMobile>p {
+    color: #000000;
+    font-family: DM Sans;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 23.44px;
+}
+
+.addStoryMiddleCon {
+    display: flex;
+}
+
+.addSlideConMobile {
+    display: flex;
+    margin-top: 0.7rem;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.slideMobile {
+    border-radius: 10px;
+    font-weight: 700;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 2.8rem;
+    width: 2.6rem;
+    cursor: pointer;
+    margin: 3px;
+    border: 2px solid transparent;
+    font-size: 0.8rem;
+    position: relative;
+    box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.1);
+    display: flex;
+}
+
+.slideMobile.active {
+    border-color: rgba(115, 171, 255, 1);
+}
+
+.slideDeleteBtnMobile {
+    position: absolute;
+    top: -15%;
+    right: 0;
+}
+
+.slideDeleteBtnMobile>img {
+    width: 0.5rem;
+}
+
+.storyBtnConMobile {
+    display: flex;
+    justify-content: center;
+}
+
+.closeAddStoryBtnMobile {
+    position: absolute;
+    right: 0.7rem;
+    top: 0.7rem;
+    cursor: pointer;
+}
+
+.closeAddStoryBtnMobile>img {
+    width: 20px;
+}
+
+.storyInputMobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.storyInputMobile>input {
+    padding: 0.2rem;
+    width: 11.8rem;
+    border: 1px solid black;
+}
+
+.addStoryLabelMobile {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.addStoryDesInputMobile {
+    padding: 0.2rem;
+    width: 11.8rem;
+    height: 3.5rem;
+    border: 1px solid black;
+    resize: none;
+}
+
+.addStoryInputMobile::placeholder {
+    color: #474141;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.addStorySelectMobile {
+    width: 11.8rem;
+    border: 1px solid black;
+    padding: 0.2rem;
+    color: #474141;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.storyInputsMobile {
+    margin: 1rem 1rem 0 1rem;
+}
+
+.btnMobile {
+    height: 2rem;
+    width: 5.8rem;
+    border-radius: 20px;
+    color: #FFFFFF;
+    font-family: DM Sans;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 0.9rem;
+}

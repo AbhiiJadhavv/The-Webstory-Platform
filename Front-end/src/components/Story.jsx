@@ -38,18 +38,44 @@ const Story = ({ setShowStory, images, setShowLogin, user, selectedStory }) => {
       setShowLogin(true);  // Show login if user is not logged in
       return;
     }
-    setLikedSlides(prev => {
-      const newLikedSlides = [...prev];
-      const newCount = newLikedSlides[index] ? likeCounts[index] - 1 : likeCounts[index] + 1;
-      newLikedSlides[index] = !newLikedSlides[index];
+  
+    const liked = likedSlides[index];
+  
+    // Send the like/unlike request to the backend
+    fetch('http://localhost:8000/api/v1/story/like-slide', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}` // Assuming you're using JWT for authentication
+      },
+      body: JSON.stringify({
+        storyId: selectedStory._id, // Send the story ID
+        slideIndex: index,          // Send the slide index
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Like response:', data);
+  
+      // Toggle the like state locally
+      setLikedSlides(prev => {
+        const newLikedSlides = [...prev];
+        newLikedSlides[index] = !newLikedSlides[index];
+        return newLikedSlides;
+      });
+  
+      // Update the like count accordingly
       setLikeCounts(prevCounts => {
         const newCounts = [...prevCounts];
-        newCounts[index] = newCount;
+        newCounts[index] = liked ? newCounts[index] - 1 : newCounts[index] + 1;
         return newCounts;
       });
-      return newLikedSlides;
+    })
+    .catch(error => {
+      console.error('Error liking the slide:', error);
     });
   };
+  
 
   const toggleBookmark = (index) => {
     if (!user) {
