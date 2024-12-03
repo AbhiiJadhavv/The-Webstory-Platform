@@ -83,7 +83,6 @@ export const getUserStories = async (req, res) => {
 // In your story controller file
 export const likeSlide = async (req, res) => {
   const { storyId, slideIndex } = req.body; // Expecting storyId and slideIndex in the request body
-  const userId = req.user ? req.user._id : null; // Ensure user is authenticated
 
   try {
     const story = await Story.findById(storyId);
@@ -96,40 +95,16 @@ export const likeSlide = async (req, res) => {
       return res.status(400).json({ message: 'Invalid slide index' });
     }
 
-    // Optionally, track users who have already liked this slide to prevent multiple likes
-    const slide = story.media[slideIndex];
-
-    // Here you could track the users who liked the slide (by storing user ids)
-    // Assuming you do not want users to like the same slide multiple times, add a "likedBy" array
-    if (!slide.likedBy) {
-      slide.likedBy = [];
-    }
-
-    // Check if the user has already liked this slide
-    const hasLiked = slide.likedBy.includes(userId);
-
-    if (hasLiked) {
-      // Unlike the slide if the user has already liked it
-      slide.likes -= 1;
-      slide.likedBy = slide.likedBy.filter(id => id.toString() !== userId.toString());
-    } else {
-      // Like the slide if the user has not liked it before
-      slide.likes += 1;
-      slide.likedBy.push(userId);
-    }
-
+    // Increment the likes for the specified slide
+    story.media[slideIndex].likes += 1;
     await story.save();
 
-    res.status(200).json({ 
-      message: hasLiked ? 'Slide unliked successfully' : 'Slide liked successfully', 
-      story 
-    });
+    res.status(200).json({ message: 'Slide liked successfully', story });
   } catch (error) {
     console.error('Error liking slide:', error);
-    res.status(500).json({ message: 'Server error', error: error.message });
+    res.status(500).json({ message: 'Server error' });
   }
 };
-
 
 
 

@@ -29,12 +29,6 @@ const storySchema = new Schema({
         type: Number,
         default: 0,
       },
-      likedBy: [
-        {
-          type: Schema.Types.ObjectId,
-          ref: 'User',
-        }
-      ],
     },
   ],
   createdAt: {

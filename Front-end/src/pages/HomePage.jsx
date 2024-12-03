@@ -34,7 +34,7 @@ const HomePage = () => {
         const fetchStories = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get("http://localhost:8000/api/v1/story/stories");
+                const response = await axios.get("https://web-story-platform-by-abhishek.onrender.com/api/v1/story/stories");
                 console.log("API Response:", response.data);
                 setStories(response.data.data);
             } catch (error) {
@@ -105,7 +105,7 @@ const HomePage = () => {
                 />
             )}
             {addStory && (
-                <AddStory setAddStory={setAddStory}  isMobileView={isMobileView} />
+                <AddStory setAddStory={setAddStory} isMobileView={isMobileView} />
             )}
             {showRegister && (
                 <Register setShowRegister={setShowRegister} />
