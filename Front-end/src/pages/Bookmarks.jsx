@@ -11,10 +11,26 @@ const Bookmarks = (user, setUser) => {
   const [addStory, setAddStory] = useState(false);
   const bookmarks = [];
   const navigate = useNavigate();
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 780);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth <= 780);
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <>
-      <Navbar user={user} setUser={setUser} setAddStory={setAddStory} />
+      {isMobileView ? (
+        <NavbarMobile setShowRegister={setShowRegister} setShowLogin={setShowLogin} setAddStory={setAddStory} user={user} setUser={setUser} />
+      ) : (
+        <Navbar setShowRegister={setShowRegister} setShowLogin={setShowLogin} setAddStory={setAddStory} user={user} setUser={setUser} />
+      )}
       {showStory && (
         <Story setShowStory={setShowStory} />
       )}

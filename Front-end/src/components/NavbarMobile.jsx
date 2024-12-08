@@ -3,6 +3,7 @@ import "../styles/NavbarMobile.css";
 import profilePhoto from "../assets/ProfilePhoto.webp";
 import hamburgerImg from "../assets/HamburgerImg.png";
 import bookmarksImg from "../assets/bookmarksImg.png";
+import webStoryLogo from "../assets/Webstory_Logo.png";
 import { useNavigate } from 'react-router-dom'
 import { USER_API_END_POINT } from "../utils/constant";
 import { toast } from "react-toastify";
@@ -37,6 +38,7 @@ const NavbarMobile = ({ setShowRegister, setShowLogin, setAddStory }) => {
 
     return (
         <div className="navbarMobile">
+            <img className="webStoryLogo" src={webStoryLogo} alt="webstory logo" onClick={() => navigate("/")} />
             <a className="icon" onClick={toggleMenu}><button className="hamburgerBtn"><img src={hamburgerImg} alt="hamburger" /></button></a>
             <div id="hamburgerContentMobile" style={{ display: isOpen ? 'flex' : 'none' }}>
                 {

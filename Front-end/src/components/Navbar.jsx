@@ -38,7 +38,7 @@ const Navbar = ({ setShowRegister, setShowLogin, setAddStory }) => {
 
   return (
     <div className="navbar">
-      <img className="webStoryLogo" src={webStoryLogo} alt="webstory logo" />
+      <img className="webStoryLogo" src={webStoryLogo} alt="webstory logo" onClick={() => navigate("/")} />
       {
         !user ? (
           <>
