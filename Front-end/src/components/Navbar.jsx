@@ -3,6 +3,7 @@ import "../styles/Navbar.css";
 import profilePhoto from "../assets/ProfilePhoto.webp";
 import hamburgerImg from "../assets/HamburgerImg.png";
 import bookmarksImg from "../assets/bookmarksImg.png";
+import webStoryLogo from "../assets/Webstory_Logo.png";
 import { useNavigate } from 'react-router-dom'
 import { USER_API_END_POINT } from "../utils/constant";
 import { toast } from "react-toastify";
@@ -37,6 +38,7 @@ const Navbar = ({ setShowRegister, setShowLogin, setAddStory }) => {
 
   return (
     <div className="navbar">
+      <img className="webStoryLogo" src={webStoryLogo} alt="webstory logo" />
       {
         !user ? (
           <>

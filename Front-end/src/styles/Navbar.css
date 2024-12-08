@@ -97,3 +97,10 @@
 .navbar a.icon {
     display: block;
 }
+
+.webStoryLogo {
+    position: fixed;
+    height: 6vh;
+    left: 1.6rem;
+    top: 2vh;
+}
