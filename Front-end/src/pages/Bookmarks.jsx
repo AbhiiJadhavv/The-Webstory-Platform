@@ -27,9 +27,9 @@ const Bookmarks = (user, setUser) => {
   return (
     <>
       {isMobileView ? (
-        <NavbarMobile setShowRegister={setShowRegister} setShowLogin={setShowLogin} setAddStory={setAddStory} user={user} setUser={setUser} />
+        <NavbarMobile setAddStory={setAddStory} user={user} setUser={setUser} />
       ) : (
-        <Navbar setShowRegister={setShowRegister} setShowLogin={setShowLogin} setAddStory={setAddStory} user={user} setUser={setUser} />
+        <Navbar setAddStory={setAddStory} user={user} setUser={setUser} />
       )}
       {showStory && (
         <Story setShowStory={setShowStory} />
