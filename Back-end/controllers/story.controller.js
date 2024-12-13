@@ -2,36 +2,41 @@ import { User } from '../models/user.model.js';
 import { Story } from '../models/story.model.js';
 
 
-// New Story
 export const createStory = async (req, res) => {
   try {
     console.log('Received payload:', req.body); // Debugging line
 
-    const { category, heading, description, media, user } = req.body;
+    const { category, media, user } = req.body;
 
-    if (!category || !heading || !description || !media || !user ) {
-      return res.status(400).json({ error: 'Invalid input data.' });
+    // Validate required fields
+    if (!category || !media || !Array.isArray(media) || media.length === 0 || !user) {
+      return res.status(400).json({ error: 'Invalid input data. Ensure all required fields are provided.' });
+    }
+
+    // Validate individual media items
+    for (const item of media) {
+      if (!item.heading || !item.description || !item.url) {
+        return res.status(400).json({ error: 'Each media item must include heading, description, and URL.' });
+      }
     }
 
     // Create new story object
     const newStory = new Story({
       user,
       category,
-      heading,
-      description,
-      media, // Ensure media is a string or array depending on the model setup
+      media,
     });
 
     // Save the story to the database
-    await newStory.save();
+    const savedStory = await newStory.save();
 
     res.status(201).json({
       message: 'Story created successfully.',
-      story: newStory,
+      story: savedStory,
     });
   } catch (error) {
     console.error('Error creating story:', error);
-    res.status(500).json({ message: 'Server error', error: error.message });
+    res.status(500).json({ message: 'Server error. Please try again later.', error: error.message });
   }
 };
 
