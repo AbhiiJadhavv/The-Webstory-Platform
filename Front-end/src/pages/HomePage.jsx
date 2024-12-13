@@ -30,19 +30,20 @@ const HomePage = () => {
     const [loading, setLoading] = useState(true);
     const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 780);
 
+    const fetchStories = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get("https://web-story-platform-by-abhishek.onrender.com/api/v1/story/stories");
+            console.log("API Response:", response.data);
+            setStories(response.data.data);
+        } catch (error) {
+            console.error("Error fetching stories:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
-        const fetchStories = async () => {
-            try {
-                setLoading(true);
-                const response = await axios.get("https://web-story-platform-by-abhishek.onrender.com/api/v1/story/stories");
-                console.log("API Response:", response.data);
-                setStories(response.data.data);
-            } catch (error) {
-                console.error("Error fetching stories:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
         fetchStories();
     }, []);
 
@@ -104,7 +105,7 @@ const HomePage = () => {
                 />
             )}
             {addStory && (
-                <AddStory setAddStory={setAddStory} isMobileView={isMobileView} user={user} />
+                <AddStory setAddStory={setAddStory} isMobileView={isMobileView} user={user} fetchStories={fetchStories} />
             )}
             {showRegister && (
                 <Register setShowRegister={setShowRegister} />
