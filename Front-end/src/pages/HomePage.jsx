@@ -104,7 +104,7 @@ const HomePage = () => {
                 />
             )}
             {addStory && (
-                <AddStory setAddStory={setAddStory} isMobileView={isMobileView} />
+                <AddStory setAddStory={setAddStory} isMobileView={isMobileView} user={user} />
             )}
             {showRegister && (
                 <Register setShowRegister={setShowRegister} />

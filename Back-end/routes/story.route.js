@@ -1,6 +1,6 @@
 import express from 'express';
-import isAuthenticated from '../middlewares/isAuthenticated.js';
-import { createStory, getAllStories, getUserStories, toggleBookmark, getUserBookmarkStories, likeSlide } from '../controllers/story.controller.js';
+import isAuthenticated from '../auth/isAuthenticated.js';
+import { createStory, getAllStories, getUserStories, getUserBookmarkStories, likeSlide } from '../controllers/story.controller.js';
 
 const router = express.Router();
 

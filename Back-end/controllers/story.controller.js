@@ -7,18 +7,15 @@ export const createStory = async (req, res) => {
   try {
     console.log('Received payload:', req.body); // Debugging line
 
-    // Ensure that req.user is populated correctly by the authentication middleware
-    const userId = req.user ? req.user._id : null;
+    const { category, heading, description, media, user } = req.body;
 
-    if (!userId) {
-      return res.status(401).json({ message: 'Unauthorized. User not authenticated.' });
+    if (!category || !heading || !description || !media || !user ) {
+      return res.status(400).json({ error: 'Invalid input data.' });
     }
-
-    const { category, heading, description, media } = req.body; 
 
     // Create new story object
     const newStory = new Story({
-      user: userId,
+      user,
       category,
       heading,
       description,
@@ -43,7 +40,7 @@ export const createStory = async (req, res) => {
 export const getAllStories = async (req, res) => {
   try {
     const stories = await Story.find()
-      .populate('user', 'username') 
+      .populate('user', 'username')
       .sort({ createdAt: -1 });
 
     res.status(200).json({

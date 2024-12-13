@@ -31,6 +31,7 @@ const Login = ({ setShowLogin, setUser }) => {
             if (res.data.success) {
                 setUser(res.data.user);
                 localStorage.setItem('user', JSON.stringify(res.data.user));
+                localStorage.setItem("token", res.data.token);
                 setShowLogin(false);
                 console.log("Login Successful.");
                 toast.success(res.data.message);

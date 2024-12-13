@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import '../styles/AddStory.css';
 import closeIcon from '../assets/closeIcon.png';
 import { toast } from 'react-toastify';
+import axios from "axios";
+import { STORY_API_END_POINT } from '../utils/constant';
 
-const AddStory = ({ setAddStory, isMobileView }) => {
+const AddStory = ({ setAddStory, isMobileView, user }) => {
   const [story, setStory] = useState([
     { id: 1, heading: '', description: '', imageUrl: '', category: '' },
     { id: 2, heading: '', description: '', imageUrl: '', category: '' },
@@ -63,7 +65,7 @@ const AddStory = ({ setAddStory, isMobileView }) => {
     });
     setStory(updatedStories);
   };
-  
+
 
   const handlePrevious = () => {
     if (activeStory > 1) {
@@ -78,53 +80,53 @@ const AddStory = ({ setAddStory, isMobileView }) => {
   };
 
   const handlePost = async () => {
-  try {
-    const payload = {
-      category: story[0].category,
-      media: story.map(slide => ({
-        heading: slide.heading,
-        description: slide.description,
-        url: slide.imageUrl,
-      })),
-    };
-
-    console.log('Payload being sent:', payload);
-
-    // Retrieve token from cookie
-    const token = document.cookie.split('; ').find(row => row.startsWith('token='));
-    if (!token) {
-      throw new Error("No token found. Please log in.");
+    try {
+      // Retrieve the token from localStorage
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error("No token found. Please log in.");
+      }
+  
+      // Construct the payload
+      const payload = {
+        category: story[0].category,
+        media: story.map(slide => ({
+          heading: slide.heading,
+          description: slide.description,
+          url: slide.imageUrl,
+        })),
+        user: user._id,
+      };
+  
+      console.log('Payload being sent:', payload);
+  
+      // Send the POST request using Axios
+      const response = await axios.post(`${STORY_API_END_POINT}/stories`, payload, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        withCredentials: true,
+      });
+  
+      // Log the response data and show success messages
+      console.log(response.data);
+      setSuccessMessage("Story posted successfully!");
+      setErrorMessage("");
+      setAddStory(false);
+      toast.success("Story posted successfully!");
+    } catch (error) {
+      // Handle errors
+      console.error('Error posting stories:', error);
+  
+      // Handle server error responses
+      if (error.response) {
+        setErrorMessage(`Error posting stories: ${error.response.status} - ${error.response.data.message || error.message}`);
+      } else {
+        setErrorMessage("Error posting stories: " + error.message);
+      }
     }
-    const authToken = token.split('=')[1];
-
-    const response = await fetch('https://web-story-platform-by-abhishek.onrender.com/api/v1/story/stories', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${authToken}`,
-      },
-      credentials: 'include',
-      body: JSON.stringify(payload),
-    });
-
-    if (!response.ok) {
-      const errorDetails = await response.text(); // Retrieve error details from response
-      throw new Error(`Error posting stories: ${response.status} - ${response.statusText} - ${errorDetails}`);
-    }
-
-    const data = await response.json();
-    console.log(data);
-    setSuccessMessage("Story posted successfully!");
-    setErrorMessage("");
-    setAddStory(false);
-    toast.success("Story posted successfully!");
-  } catch (error) {
-    console.error('Error posting stories:', error);
-    setErrorMessage("Error posting stories: " + error.message);
-  }
-};
-
-
+  };
+  
   return (
     <div className="addStoryCon">
 

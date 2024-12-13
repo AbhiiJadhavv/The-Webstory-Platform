@@ -26,6 +26,7 @@ const NavbarMobile = ({ setShowRegister, setShowLogin, setAddStory }) => {
             if (res.data.success) {
                 setUser(null);
                 localStorage.removeItem('user');
+                localStorage.removeItem('token');
                 navigate("/");
                 toast.success(res.data.message);
                 console.log("Logout Successfull.");
