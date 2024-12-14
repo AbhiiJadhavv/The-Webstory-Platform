@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import axios from "axios";
 import { STORY_API_END_POINT } from '../utils/constant';
 
-const AddStory = ({ setAddStory, isMobileView, user, fetchStories }) => {
+const AddStory = ({ setAddStory, isMobileView, user, fetchStories, fetchUserStories }) => {
   const [story, setStory] = useState([
     { id: 1, heading: '', description: '', imageUrl: '', category: '' },
     { id: 2, heading: '', description: '', imageUrl: '', category: '' },
@@ -114,6 +114,7 @@ const AddStory = ({ setAddStory, isMobileView, user, fetchStories }) => {
       setErrorMessage("");
       setAddStory(false);
       toast.success("Story posted successfully!");
+      fetchUserStories();
       fetchStories();
     } catch (error) {
       // Handle errors

@@ -26,6 +26,7 @@ const HomePage = () => {
     const [addStory, setAddStory] = useState(false);
     const [selectedFilter, setSelectedFilter] = useState('All');
     const [stories, setStories] = useState([]);
+    const [userStories, setUserStories] = useState([]);
     const [selectedStory, setSelectedStory] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 780);
@@ -42,6 +43,22 @@ const HomePage = () => {
             setLoading(false);
         }
     };
+
+    const fetchUserStories = async () => {
+        if (user) {
+          try {
+            const response = await axios.get(`https://web-story-platform-by-abhishek.onrender.com/api/v1/story/stories/user/${user._id}`, {
+              headers: {
+                Authorization: `Bearer ${user.token}`,
+              },
+            });
+            setUserStories(response.data.data);
+          } catch (error) {
+            console.error("Error fetching stories", error);
+            // setError("Failed to load stories.");
+          }
+        }
+      };
 
     useEffect(() => {
         fetchStories();
@@ -77,7 +94,7 @@ const HomePage = () => {
             <>
                 {selectedFilter === 'All' && (
                     <>
-                        {user && (<YourStories user={user} setShowStory={setShowStory} setSelectedStory={setSelectedStory} />)}
+                        {user && (<YourStories user={user} setShowStory={setShowStory} setSelectedStory={setSelectedStory} fetchUserStories={fetchUserStories} userStories={userStories} />)}
                         <FoodStories setShowStory={setShowStory} stories={stories} setSelectedStory={setSelectedStory} />
                         <HealthStories setShowStory={setShowStory} stories={stories} setSelectedStory={setSelectedStory} />
                         <TravelStories setShowStory={setShowStory} stories={stories} setSelectedStory={setSelectedStory} />
@@ -105,7 +122,7 @@ const HomePage = () => {
                 />
             )}
             {addStory && (
-                <AddStory setAddStory={setAddStory} isMobileView={isMobileView} user={user} fetchStories={fetchStories} />
+                <AddStory setAddStory={setAddStory} isMobileView={isMobileView} user={user} fetchStories={fetchStories} fetchUserStories={fetchUserStories} />
             )}
             {showRegister && (
                 <Register setShowRegister={setShowRegister} />

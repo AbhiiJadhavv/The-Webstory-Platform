@@ -1,29 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import "../styles/Stories.css";
 import editIcon from "../assets/editIcon.png";
-import axios from 'axios';
 
-const YourStories = ({ user, setShowStory, setSelectedStory }) => {
+const YourStories = ({ user, setShowStory, setSelectedStory, fetchUserStories, userStories }) => {
   const [seeMore, setSeeMore] = useState(false);
-  const [stories, setStories] = useState([]);
 
   useEffect(() => {
-    const fetchUserStories = async () => {
-      if (user) {
-        try {
-          const response = await axios.get(`https://web-story-platform-by-abhishek.onrender.com/api/v1/story/stories/user/${user._id}`, {
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
-          });
-          setStories(response.data.data);
-        } catch (error) {
-          console.error("Error fetching stories", error);
-          // setError("Failed to load stories.");
-        }
-      }
-    };
-
     fetchUserStories();
   }, [user]);
 
@@ -36,7 +18,7 @@ const YourStories = ({ user, setShowStory, setSelectedStory }) => {
     setShowStory(true);
   };
 
-  const yourStories = stories;
+  const yourStories = userStories;
 
   return (
     <div className='storiesCon'>
