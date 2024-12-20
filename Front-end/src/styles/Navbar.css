@@ -43,6 +43,10 @@
     justify-content: center;
 }
 
+.bookmarksBtn>p {
+    font-family: "Devonshire";
+}
+
 .bookmarksBtn>img {
     height: 1.3rem;
 }
