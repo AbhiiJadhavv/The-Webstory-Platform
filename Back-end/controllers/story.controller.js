@@ -2,32 +2,29 @@ import { User } from '../models/user.model.js';
 import { Story } from '../models/story.model.js';
 
 
+// Create Story
 export const createStory = async (req, res) => {
   try {
-    console.log('Received payload:', req.body); // Debugging line
+    console.log('Received payload:', req.body);
 
     const { category, media, user } = req.body;
 
-    // Validate required fields
     if (!category || !media || !Array.isArray(media) || media.length === 0 || !user) {
       return res.status(400).json({ error: 'Invalid input data. Ensure all required fields are provided.' });
     }
 
-    // Validate individual media items
     for (const item of media) {
       if (!item.heading || !item.description || !item.url) {
         return res.status(400).json({ error: 'Each media item must include heading, description, and URL.' });
       }
     }
 
-    // Create new story object
     const newStory = new Story({
       user,
       category,
       media,
     });
 
-    // Save the story to the database
     const savedStory = await newStory.save();
 
     res.status(201).json({
@@ -58,17 +55,16 @@ export const getAllStories = async (req, res) => {
   }
 };
 
-// User Stories
+
 // User Stories
 export const getUserStories = async (req, res) => {
   try {
-    // Get userId from request parameters, or use the authenticated user's ID
-    const userId = req.params.userId || req.user._id; // Use req.params.userId if provided, otherwise use req.user._id
+    
+    const userId = req.params.userId || req.user._id; 
 
-    // Fetch stories for the specified user ID
     const stories = await Story.find({ user: userId })
       .sort({ createdAt: -1 })
-      .populate('user', 'username'); // Populate user to get username if needed
+      .populate('user', 'username'); 
 
     res.status(200).json({
       count: stories.length,
@@ -79,7 +75,6 @@ export const getUserStories = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
-
 
 
 // In your story controller file
@@ -107,7 +102,6 @@ export const likeSlide = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
-
 
 
 // Toggle bookmark
@@ -142,6 +136,7 @@ export const toggleBookmark = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
+
 
 // Get user bookmark stories
 export const getUserBookmarkStories = async (req, res) => {

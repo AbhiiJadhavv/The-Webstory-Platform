@@ -114,10 +114,10 @@ const HomePage = () => {
                     setShowLogin={setShowLogin}
                     selectedStory={selectedStory}
                     user={user}
-                    images={selectedStory.media.map(media => ({
-                        src: media.url,
-                        alt: media.heading,
-                        description: media.description,
+                    images={selectedStory.slides.map(slide => ({
+                        src: slide.url,
+                        alt: slide.heading,
+                        description: slide.description,
                     }))}
                 />
             )}

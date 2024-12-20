@@ -11,7 +11,7 @@ const storySchema = new Schema({
     type: String,
     required: true
   },
-  media: [
+  slides: [
     {
       heading: {
         type: String,
