@@ -43,7 +43,7 @@
 
 .filter>p {
     color: #FFFFFF;
-    font-family: DM Sans;
+    font-family: "Lobster Two", DM Sans;
     font-size: 1.35rem;
     font-weight: 700;
     line-height: 1.4rem;
@@ -101,7 +101,7 @@
 
     .filter>p {
         color: #FFFFFF;
-        font-family: DM Sans;
+        font-family: "Lobster Two", DM Sans;
         font-size: 1.1rem;
         font-weight: 700;
         line-height: 1.1rem;
