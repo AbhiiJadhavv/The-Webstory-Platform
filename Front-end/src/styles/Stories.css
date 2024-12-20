@@ -136,8 +136,9 @@
     }
     
     .topStoriesPara {
-        color: #000000;
+        color: #1a9582;
         font-family: "Petit Formal Script", DM Sans;
+        text-align: center;
         font-size: 1.3rem;
         font-weight: 700;
         line-height: 1.5rem;
