@@ -7,22 +7,22 @@ export const createStory = async (req, res) => {
   try {
     console.log('Received payload:', req.body);
 
-    const { category, media, user } = req.body;
+    const { category, slides, user } = req.body;
 
-    if (!category || !media || !Array.isArray(media) || media.length === 0 || !user) {
+    if (!category || !slides || !Array.isArray(slides) || slides.length === 0 || !user) {
       return res.status(400).json({ error: 'Invalid input data. Ensure all required fields are provided.' });
     }
 
-    for (const item of media) {
+    for (const item of slides) {
       if (!item.heading || !item.description || !item.url) {
-        return res.status(400).json({ error: 'Each media item must include heading, description, and URL.' });
+        return res.status(400).json({ error: 'Each slides item must include heading, description, and URL.' });
       }
     }
 
     const newStory = new Story({
       user,
       category,
-      media,
+      slides,
     });
 
     const savedStory = await newStory.save();

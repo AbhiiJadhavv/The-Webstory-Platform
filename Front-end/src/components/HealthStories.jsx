@@ -20,20 +20,20 @@ const HealthStories = ({ setShowStory, stories, setSelectedStory }) => {
           <div className='stories'>
             {!seeMore
               ? (healthStories.slice(0, 4).map((story, index) => (
-                <div className='homeStory' key={index} onClick={() => handleCardClick(story)} style={{ backgroundImage: `url("${story.media[0]?.url}")` }} >
+                <div className='homeStory' key={index} onClick={() => handleCardClick(story)} style={{ backgroundImage: `url("${story.slides[0]?.url}")` }} >
                   <div className='homeStoryTopCon'></div>
                   <div className='homeStoryBottomCon'>
-                    <p className='headingPara'>{story.media[0]?.heading}</p>
-                    <p className='descriptionPara'>{story.media[0]?.description}</p>
+                    <p className='headingPara'>{story.slides[0]?.heading}</p>
+                    <p className='descriptionPara'>{story.slides[0]?.description}</p>
                   </div>
                 </div>
               )))
               : (healthStories.map((story, index) => (
-                <div className='homeStory' key={index} onClick={() => handleCardClick(story)} style={{ backgroundImage: `url("${story.media[0]?.url}")` }} >
+                <div className='homeStory' key={index} onClick={() => handleCardClick(story)} style={{ backgroundImage: `url("${story.slides[0]?.url}")` }} >
                   <div className='homeStoryTopCon'></div>
                   <div className='homeStoryBottomCon'>
-                    <p className='headingPara'>{story.media[0]?.heading}</p>
-                    <p className='descriptionPara'>{story.media[0]?.description}</p>
+                    <p className='headingPara'>{story.slides[0]?.heading}</p>
+                    <p className='descriptionPara'>{story.slides[0]?.description}</p>
                   </div>
                 </div>
               )))

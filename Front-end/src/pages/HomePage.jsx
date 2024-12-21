@@ -46,19 +46,19 @@ const HomePage = () => {
 
     const fetchUserStories = async () => {
         if (user) {
-          try {
-            const response = await axios.get(`https://web-story-platform-by-abhishek.onrender.com/api/v1/story/stories/user/${user._id}`, {
-              headers: {
-                Authorization: `Bearer ${user.token}`,
-              },
-            });
-            setUserStories(response.data.data);
-          } catch (error) {
-            console.error("Error fetching stories", error);
-            // setError("Failed to load stories.");
-          }
+            try {
+                const response = await axios.get(`https://web-story-platform-by-abhishek.onrender.com/api/v1/story/stories/user/${user._id}`, {
+                    headers: {
+                        Authorization: `Bearer ${user.token}`,
+                    },
+                });
+                setUserStories(response.data.data);
+            } catch (error) {
+                console.error("Error fetching stories", error);
+                // setError("Failed to load stories.");
+            }
         }
-      };
+    };
 
     useEffect(() => {
         fetchStories();

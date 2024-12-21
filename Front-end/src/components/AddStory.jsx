@@ -90,7 +90,7 @@ const AddStory = ({ setAddStory, isMobileView, user, fetchStories, fetchUserStor
       // Construct the payload
       const payload = {
         category: story[0].category,
-        media: story.map(slide => ({
+        slides: story.map(slide => ({
           heading: slide.heading,
           description: slide.description,
           url: slide.imageUrl,
