@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import "../styles/Stories.css";
 import editIcon from "../assets/editIcon.png";
+import EditStory from './EditStory';
 
-const YourStories = ({ user, setShowStory, setSelectedStory, fetchUserStories, userStories }) => {
+const YourStories = ({ user, setShowStory, setSelectedStory, fetchUserStories, userStories, selectedStory }) => {
   const [seeMore, setSeeMore] = useState(false);
+  const [editStory, setEditStory] = useState(false);
 
   useEffect(() => {
     fetchUserStories();
   }, [user]);
 
-  const editBtnHandler = (e) => {
+  const editBtnHandler = (e, story) => {
     e.stopPropagation();
+    setSelectedStory(story);
+    setEditStory(true);
   }
 
   const handleCardClick = (story) => {
@@ -36,7 +40,7 @@ const YourStories = ({ user, setShowStory, setSelectedStory, fetchUserStories, u
                     <p className='headingPara'>{story.slides[0]?.heading}</p>
                     <p className='descriptionPara'>{story.slides[0]?.description}</p>
                   </div>
-                  {user && (<button className='editStoryBtn' onClick={editBtnHandler}><img src={editIcon} alt="edit" />Edit</button>)}
+                  {user && (<button className='editStoryBtn' onClick={(e) => editBtnHandler(e, story)}><img src={editIcon} alt="edit" />Edit</button>)}
                 </div>
               )))
               : (yourStories.map((story, index) => (
@@ -46,7 +50,7 @@ const YourStories = ({ user, setShowStory, setSelectedStory, fetchUserStories, u
                     <p className='headingPara'>{story.slides[0]?.heading}</p>
                     <p className='descriptionPara'>{story.slides[0]?.description}</p>
                   </div>
-                  {user && (<button className='editStoryBtn' onClick={editBtnHandler}><img src={editIcon} alt="edit" />Edit</button>)}
+                  {user && (<button className='editStoryBtn' onClick={(e) => editBtnHandler(e, story)}><img src={editIcon} alt="edit" />Edit</button>)}
                 </div>
               )))
             }
@@ -55,6 +59,9 @@ const YourStories = ({ user, setShowStory, setSelectedStory, fetchUserStories, u
       }
       {yourStories.length > 4 && !seeMore && (
         <button onClick={() => setSeeMore(true)}>See more</button>
+      )}
+      {editStory && (
+        <EditStory selectedStory={selectedStory} setEditStory={setEditStory} />
       )}
     </div>
   )

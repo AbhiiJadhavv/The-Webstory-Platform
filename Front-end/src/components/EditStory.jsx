@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import axios from "axios";
 import { STORY_API_END_POINT } from '../utils/constant';
 
-const AddStory = ({ setAddStory, isMobileView, user, fetchStories, fetchUserStories }) => {
+const EditStory = ({ setEditStory, isMobileView, user, fetchStories, fetchUserStories, selectedStory }) => {
   const [story, setStory] = useState([
     { id: 1, heading: '', description: '', imageUrl: '', category: '' },
     { id: 2, heading: '', description: '', imageUrl: '', category: '' },
@@ -23,6 +23,19 @@ const AddStory = ({ setAddStory, isMobileView, user, fetchStories, fetchUserStor
     { value: 'movies', label: 'Movies' },
     { value: 'education', label: 'Education' }
   ];
+
+  useEffect(() => {
+    if (selectedStory) {
+      const initialStory = selectedStory.slides.map((slide, index) => ({
+        id: index + 1,
+        heading: slide.heading,
+        description: slide.description,
+        imageUrl: slide.url,
+        category: selectedStory.category,
+      }));
+      setStory(initialStory);
+    }
+  }, [selectedStory]);
 
   const handleAddStory = () => {
     if (story.length < 6) {
@@ -77,7 +90,7 @@ const AddStory = ({ setAddStory, isMobileView, user, fetchStories, fetchUserStor
     }
   };
 
-  const handlePost = async () => {
+  const handleUpdate = async () => {
     try {
       // Retrieve the token from localStorage
       const token = localStorage.getItem('token');
@@ -108,21 +121,21 @@ const AddStory = ({ setAddStory, isMobileView, user, fetchStories, fetchUserStor
   
       // Log the response data and show success messages
       console.log(response.data);
-      setSuccessMessage("Story posted successfully!");
+      setSuccessMessage("Story updated successfully!");
       setErrorMessage("");
-      setAddStory(false);
-      toast.success("Story posted successfully!");
+      setEditStory(false);
+      toast.success("Story updated successfully!");
       fetchUserStories();
       fetchStories();
     } catch (error) {
       // Handle errors
-      console.error('Error posting stories:', error);
+      console.error('Error updating stories:', error);
   
       // Handle server error responses
       if (error.response) {
-        setErrorMessage(`Error posting stories: ${error.response.status} - ${error.response.data.message || error.message}`);
+        setErrorMessage(`Error updating stories: ${error.response.status} - ${error.response.data.message || error.message}`);
       } else {
-        setErrorMessage("Error posting stories: " + error.message);
+        setErrorMessage("Error updating stories: " + error.message);
       }
     }
   };
@@ -135,7 +148,7 @@ const AddStory = ({ setAddStory, isMobileView, user, fetchStories, fetchUserStor
           <>
             <div className="addStoryMobile">
 
-              <span className='closeAddStoryBtnMobile' onClick={() => setAddStory(false)}><img src={closeIcon} alt="close" /></span>
+              <span className='closeAddStoryBtnMobile' onClick={() => setEditStory(false)}><img src={closeIcon} alt="close" /></span>
 
               <div className='addStoryHeadingMobile'><p>Add story to feed</p></div>
 
@@ -222,7 +235,7 @@ const AddStory = ({ setAddStory, isMobileView, user, fetchStories, fetchUserStor
 
               <div className="storyBtnConMobile">
                 <div className="story-btn-submit">
-                  <button className='btnMobile postStoryBtn' onClick={handlePost}>Post</button>
+                  <button className='btnMobile postStoryBtn' onClick={handleUpdate}>Update</button>
                 </div>
               </div>
             </div>
@@ -231,7 +244,7 @@ const AddStory = ({ setAddStory, isMobileView, user, fetchStories, fetchUserStor
           <>
             <div className="addStory">
 
-              <span className='closeAddStoryBtn' onClick={() => setAddStory(false)}><img src={closeIcon} alt="close" /></span>
+              <span className='closeAddStoryBtn' onClick={() => setEditStory(false)}><img src={closeIcon} alt="close" /></span>
 
               {successMessage && <div className="success-message">{successMessage}</div>}
               {errorMessage && <div className="error-message">{errorMessage}</div>}
@@ -319,7 +332,7 @@ const AddStory = ({ setAddStory, isMobileView, user, fetchStories, fetchUserStor
                   <button className='btn nextSlideBtn' onClick={handleNext}>Next</button>
                 </div>
                 <div className="story-btn-submit">
-                  <button className='btn postStoryBtn' onClick={handlePost}>Post</button>
+                  <button className='btn postStoryBtn' onClick={handleUpdate}>Update</button>
                 </div>
               </div>
             </div>
@@ -330,4 +343,4 @@ const AddStory = ({ setAddStory, isMobileView, user, fetchStories, fetchUserStor
   );
 };
 
-export default AddStory;
+export default EditStory;

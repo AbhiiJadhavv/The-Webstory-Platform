@@ -94,7 +94,7 @@ const HomePage = () => {
             <>
                 {selectedFilter === 'All' && (
                     <>
-                        {user && (<YourStories user={user} setShowStory={setShowStory} setSelectedStory={setSelectedStory} fetchUserStories={fetchUserStories} userStories={userStories} />)}
+                        {user && (<YourStories user={user} setShowStory={setShowStory} setSelectedStory={setSelectedStory} fetchUserStories={fetchUserStories} userStories={userStories} selectedStory={selectedStory} />)}
                         <FoodStories setShowStory={setShowStory} stories={stories} setSelectedStory={setSelectedStory} />
                         <HealthStories setShowStory={setShowStory} stories={stories} setSelectedStory={setSelectedStory} />
                         <TravelStories setShowStory={setShowStory} stories={stories} setSelectedStory={setSelectedStory} />

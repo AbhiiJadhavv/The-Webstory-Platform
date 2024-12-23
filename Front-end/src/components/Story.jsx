@@ -11,7 +11,6 @@ import bookmarksImg from "../assets/bookmarksImg.png";
 import downloadDoneImg from "../assets/downloadDoneImg.png";
 import downloadImg from "../assets/downloadImg.png";
 
-
 const Story = ({ setShowStory, images, setShowLogin, user, selectedStory }) => {
   const [slideIndex, setSlideIndex] = useState(1);
   const [likedSlides, setLikedSlides] = useState(Array(images.length).fill(false));
@@ -20,6 +19,7 @@ const Story = ({ setShowStory, images, setShowLogin, user, selectedStory }) => {
   const [downloadedSlides, setDownloadedSlides] = useState(Array(images.length).fill(false));
   const [showDownloadMessage, setShowDownloadMessage] = useState(Array(images.length).fill(false));
   const [showShareMessage, setShowShareMessage] = useState(Array(images.length).fill(false));
+
   const showSlides = (n) => {
     let newIndex = n > images.length ? 1 : n < 1 ? images.length : n;
     setSlideIndex(newIndex);
