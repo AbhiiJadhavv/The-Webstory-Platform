@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/AddStory.css';
 import closeIcon from '../assets/closeIcon.png';
 import { toast } from 'react-toastify';
