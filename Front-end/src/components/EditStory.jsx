@@ -100,21 +100,21 @@ const EditStory = ({ setEditStory, isMobileView, user, fetchStories, fetchUserSt
   
       // Construct the payload
       const payload = {
-        category: story[0].category,
+        category: story[0].category, // The category is the same across slides
         slides: story.map(slide => ({
           heading: slide.heading,
           description: slide.description,
-          url: slide.imageUrl,
+          url: slide.imageUrl, // Map imageUrl to url for the API
         })),
-        user: user._id,
       };
   
       console.log('Payload being sent:', payload);
   
-      // Send the POST request using Axios
-      const response = await axios.post(`${STORY_API_END_POINT}/stories`, payload, {
+      // Send the PUT request using Axios
+      const response = await axios.put(`${STORY_API_END_POINT}/stories/${selectedStory._id}`, payload, {
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
         withCredentials: true,
       });
@@ -123,10 +123,10 @@ const EditStory = ({ setEditStory, isMobileView, user, fetchStories, fetchUserSt
       console.log(response.data);
       setSuccessMessage("Story updated successfully!");
       setErrorMessage("");
-      setEditStory(false);
+      setEditStory(false); // Exit edit mode
       toast.success("Story updated successfully!");
-      fetchUserStories();
-      fetchStories();
+      fetchUserStories(); // Refresh the user's stories
+      fetchStories();     // Refresh all stories
     } catch (error) {
       // Handle errors
       console.error('Error updating stories:', error);
@@ -138,7 +138,7 @@ const EditStory = ({ setEditStory, isMobileView, user, fetchStories, fetchUserSt
         setErrorMessage("Error updating stories: " + error.message);
       }
     }
-  };
+  };  
   
   return (
     <div className="addStoryCon">

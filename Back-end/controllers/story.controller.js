@@ -38,6 +38,43 @@ export const createStory = async (req, res) => {
 };
 
 
+// Update Story
+export const updateStory = async (req, res) => {
+  try {
+    const { storyId } = req.params;
+    const { category, slides } = req.body;
+
+    if (!category || !slides || !Array.isArray(slides) || slides.length === 0) {
+      return res.status(400).json({ error: 'Invalid input data. Ensure all required fields are provided.' });
+    }
+
+    for (const slide of slides) {
+      if (!slide.heading || !slide.description || !slide.url) {
+        return res.status(400).json({ error: 'Each slide must include a heading, description, and URL.' });
+      }
+    }
+
+    const updatedStory = await Story.findByIdAndUpdate(
+      storyId,
+      { category, slides },
+      { new: true, runValidators: true } // Return the updated story and validate the input.
+    );
+
+    if (!updatedStory) {
+      return res.status(404).json({ error: 'Story not found.' });
+    }
+
+    res.status(200).json({
+      message: 'Story updated successfully.',
+      story: updatedStory,
+    });
+  } catch (error) {
+    console.error('Error updating story:', error);
+    res.status(500).json({ message: 'Server error. Please try again later.', error: error.message });
+  }
+};
+
+
 // All Stories
 export const getAllStories = async (req, res) => {
   try {
