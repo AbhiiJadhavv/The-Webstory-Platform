@@ -3,7 +3,7 @@ import "../styles/Stories.css";
 import editIcon from "../assets/editIcon.png";
 import EditStory from './EditStory';
 
-const YourStories = ({ user, setShowStory, setSelectedStory, fetchUserStories, userStories, selectedStory }) => {
+const YourStories = ({ user, setShowStory, setSelectedStory, fetchUserStories, userStories, selectedStory, fetchStories, isMobileView }) => {
   const [seeMore, setSeeMore] = useState(false);
   const [editStory, setEditStory] = useState(false);
 
@@ -61,7 +61,7 @@ const YourStories = ({ user, setShowStory, setSelectedStory, fetchUserStories, u
         <button onClick={() => setSeeMore(true)}>See more</button>
       )}
       {editStory && (
-        <EditStory selectedStory={selectedStory} setEditStory={setEditStory} />
+        <EditStory selectedStory={selectedStory} setEditStory={setEditStory} fetchUserStories={fetchUserStories} fetchStories={fetchStories} isMobileView={isMobileView} user={user} />
       )}
     </div>
   )
