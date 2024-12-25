@@ -143,8 +143,7 @@ export const likeSlide = async (req, res) => {
 
 export const toggleBookmark = async (req, res) => {
   try {
-    const userId = req.user._id; // Extracted from authenticated user
-    const { slideId } = req.body;
+    const { slideId, userId } = req.body;
 
     if (!slideId) {
       return res.status(400).json({ message: "Slide ID is required." });

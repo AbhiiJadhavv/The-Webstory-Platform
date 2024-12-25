@@ -60,11 +60,12 @@ const Story = ({ setShowStory, images, setShowLogin, user, selectedStory }) => {
     }
 
     const slideId = selectedStory.slides[index]._id;
+    const userId = user._id;
 
     try {
       const response = await axios.put(
         `${USER_API_END_POINT}/bookmarks`,
-        { slideId },
+        { slideId, userId },
         {
           headers: {
             Authorization: `Bearer ${user.token}`, // Include user's token for authentication
