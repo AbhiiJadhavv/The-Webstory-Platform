@@ -10,6 +10,8 @@ import bookmarkActiveImg from "../assets/bookmarkActiveImg.png";
 import bookmarksImg from "../assets/bookmarksImg.png";
 import downloadDoneImg from "../assets/downloadDoneImg.png";
 import downloadImg from "../assets/downloadImg.png";
+import axios from 'axios';
+import { USER_API_END_POINT } from '../utils/constant';
 
 const Story = ({ setShowStory, images, setShowLogin, user, selectedStory }) => {
   const [slideIndex, setSlideIndex] = useState(1);
@@ -51,18 +53,36 @@ const Story = ({ setShowStory, images, setShowLogin, user, selectedStory }) => {
     });
   };
 
-  const toggleBookmark = (index) => {
+  const toggleBookmark = async (index) => {
     if (!user) {
-      setShowLogin(true);  // Show login if user is not logged in
+      setShowLogin(true); // Show login if the user is not logged in
       return;
     }
 
-    setBookmarkedSlides(prev => {
-      const newBookmarkedSlides = [...prev];
-      newBookmarkedSlides[index] = !newBookmarkedSlides[index];
-      console.log(newBookmarkedSlides);
-      return newBookmarkedSlides;
-    });
+    const slideId = selectedStory.slides[index]._id;
+
+    try {
+      const response = await axios.put(
+        `${USER_API_END_POINT}/bookmarks`,
+        { slideId },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`, // Include user's token for authentication
+          },
+        }
+      );
+
+      // Update local state based on API response
+      setBookmarkedSlides((prev) => {
+        const newBookmarkedSlides = [...prev];
+        newBookmarkedSlides[index] = !newBookmarkedSlides[index];
+        return newBookmarkedSlides;
+      });
+
+      console.log(response.data.message);
+    } catch (error) {
+      console.error("Error toggling bookmark:", error.response?.data?.message || error.message);
+    }
   };
 
   const handleDownload = (index) => {

@@ -1,6 +1,6 @@
 import express from 'express';
 import isAuthenticated from '../auth/isAuthenticated.js';
-import { createStory, getAllStories, getUserStories, getUserBookmarkStories, likeSlide, updateStory } from '../controllers/story.controller.js';
+import { createStory, getAllStories, getUserStories, getUserBookmarkStories, likeSlide, updateStory, toggleBookmark } from '../controllers/story.controller.js';
 
 const router = express.Router();
 
@@ -15,6 +15,9 @@ router.get('/stories/user/:userId',  getUserStories);
 
 // Update story route
 router.put('/stories/:storyId', isAuthenticated, updateStory);
+
+// Toggle bookmark route
+router.put("/bookmarks", isAuthenticated, toggleBookmark);
 
 // Get bookmarked stories of the authenticated user
 router.get('/stories/bookmarked', isAuthenticated, getUserBookmarkStories); 

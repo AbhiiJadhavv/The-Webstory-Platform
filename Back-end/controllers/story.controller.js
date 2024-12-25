@@ -141,36 +141,39 @@ export const likeSlide = async (req, res) => {
 };
 
 
-// Toggle bookmark
 export const toggleBookmark = async (req, res) => {
   try {
-    const { storyId } = req.params;
-    const userId = req.user._id;
+    const userId = req.user._id; // Extracted from authenticated user
+    const { slideId } = req.body;
+
+    if (!slideId) {
+      return res.status(400).json({ message: "Slide ID is required." });
+    }
 
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).json({ message: 'User not found.' });
+      return res.status(404).json({ message: "User not found." });
     }
 
-    const isBookmarked = user.bookmarks.includes(storyId);
+    const isBookmarked = user.bookmarks.includes(slideId);
 
     if (isBookmarked) {
-      user.bookmarks = user.bookmarks.filter(id => id.toString() !== storyId);
+      // Remove the slideId from bookmarks
+      user.bookmarks = user.bookmarks.filter((id) => id.toString() !== slideId);
     } else {
-      user.bookmarks.push(storyId);
+      // Add the slideId to bookmarks
+      user.bookmarks.push(slideId);
     }
 
     await user.save();
 
-    const updatedUser = await User.findById(userId).populate('bookmarks');
-
     res.status(200).json({
-      message: isBookmarked ? 'Bookmark removed.' : 'Story bookmarked.',
-      bookmarks: updatedUser.bookmarks,
+      message: isBookmarked ? "Bookmark removed." : "Bookmark added.",
+      bookmarks: user.bookmarks,
     });
   } catch (error) {
-    console.error('Error toggling bookmark:', error);
-    res.status(500).json({ message: 'Server error', error: error.message });
+    console.error("Error toggling bookmark:", error);
+    res.status(500).json({ message: "Server error. Please try again later.", error: error.message });
   }
 };
 
