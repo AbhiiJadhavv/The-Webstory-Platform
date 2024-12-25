@@ -63,12 +63,17 @@ const Story = ({ setShowStory, images, setShowLogin, user, selectedStory }) => {
     const userId = user._id;
 
     try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error("No token found. Please log in.");
+      }
+
       const response = await axios.put(
         `${USER_API_END_POINT}/bookmarks`,
         { slideId, userId },
         {
           headers: {
-            Authorization: `Bearer ${user.token}`, // Include user's token for authentication
+            Authorization: `Bearer ${token}`, // Include user's token for authentication
           },
         }
       );
