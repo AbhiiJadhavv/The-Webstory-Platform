@@ -142,7 +142,7 @@ export const likeSlide = async (req, res) => {
 
 
 // Get user bookmark stories
-export const getUserBookmarkStories = async (req, res) => {
+export const getUserBookmarkSlides = async (req, res) => {
   try {
     const userId = req.user._id;
 
