@@ -160,3 +160,31 @@ export const getUserBookmarkSlides = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
+
+
+export const getBookmarkedSlides = async (req, res) => {
+    try {
+        const { userId } = req.params;
+
+        if (!userId) {
+            return res.status(400).json({ message: "User ID is required." });
+        }
+
+        const user = await User.findById(userId).populate({
+            path: 'bookmarks',
+            select: 'heading description url likes', // Select specific fields
+        });
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found." });
+        }
+
+        res.status(200).json({ 
+            message: "Bookmarked slides fetched successfully.",
+            bookmarks: user.bookmarks,
+        });
+    } catch (error) {
+        console.error("Error fetching bookmarked slides:", error);
+        res.status(500).json({ message: "Server error. Please try again later.", error: error.message });
+    }
+};

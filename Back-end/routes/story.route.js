@@ -1,6 +1,6 @@
 import express from 'express';
 import isAuthenticated from '../auth/isAuthenticated.js';
-import { createStory, getAllStories, getUserBookmarkSlides, getUserStories, likeSlide, updateStory } from '../controllers/story.controller.js';
+import { createStory, getAllStories, getBookmarkedSlides, getUserBookmarkSlides, getUserStories, likeSlide, updateStory } from '../controllers/story.controller.js';
 
 const router = express.Router();
 
@@ -21,5 +21,7 @@ router.get('/stories/bookmarked', isAuthenticated, getUserBookmarkSlides);
 
 // Add a route for this function
 router.post('/like-slide', likeSlide);
+
+router.get('/bookmarks/:userId', getBookmarkedSlides);
 
 export default router;
