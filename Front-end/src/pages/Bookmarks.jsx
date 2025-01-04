@@ -6,8 +6,10 @@ import AddStory from '../components/AddStory';
 import NavbarMobile from '../components/NavbarMobile';
 import axios from 'axios';
 import { STORY_API_END_POINT } from '../utils/constant';
+import { useUser } from '../UserContext';
 
-const Bookmarks = ({ user, setUser }) => {
+const Bookmarks = () => {
+  const { user, setUser } = useUser();
   const [showStory, setShowStory] = useState(false);
   const [addStory, setAddStory] = useState(false);
   const [bookmarks, setBookmarks] = useState([]);
