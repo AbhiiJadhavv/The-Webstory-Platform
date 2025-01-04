@@ -26,6 +26,7 @@ const Bookmarks = ({ user, setUser }) => {
 
   useEffect(() => {
     if (user && user._id) {
+      console.log(user._id);
       const fetchBookmarks = async () => {
         try {
           const response = await axios.get(`${STORY_API_END_POINT}/bookmarks/${user._id}`);
