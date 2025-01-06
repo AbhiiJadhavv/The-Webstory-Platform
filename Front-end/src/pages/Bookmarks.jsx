@@ -52,6 +52,7 @@ const Bookmarks = () => {
             slideIds: bookmarkIds,
           });
           setSlides(response.data.slides);
+          console.log(response.data.slides);          
         } catch (error) {
           console.error("Error fetching slide details:", error);
         }
