@@ -34,6 +34,7 @@ const Bookmarks = () => {
         try {
           const response = await axios.get(`${STORY_API_END_POINT}/bookmarks/${user._id}`);
           setBookmarkIds(response.data.bookmarks);
+          console.log(response.data.bookmarks);
         } catch (error) {
           console.error("Error fetching bookmarks:", error);
         }
