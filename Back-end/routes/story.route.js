@@ -1,6 +1,6 @@
 import express from 'express';
 import isAuthenticated from '../auth/isAuthenticated.js';
-import { createStory, getAllStories, getBookmarkedSlides, getUserBookmarkSlides, getUserStories, likeSlide, updateStory } from '../controllers/story.controller.js';
+import { createStory, getAllStories, getBookmarkedSlides, getSlidesByIds, getUserBookmarkSlides, getUserStories, likeSlide, updateStory } from '../controllers/story.controller.js';
 
 const router = express.Router();
 
@@ -23,5 +23,7 @@ router.get('/stories/bookmarked', isAuthenticated, getUserBookmarkSlides);
 router.post('/like-slide', likeSlide);
 
 router.get('/bookmarks/:userId', getBookmarkedSlides);
+
+router.post('/slides/details', getSlidesByIds);
 
 export default router;

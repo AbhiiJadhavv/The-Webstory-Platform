@@ -186,3 +186,28 @@ export const getBookmarkedSlides = async (req, res) => {
   }
 };
 
+export const getSlidesByIds = async (req, res) => {
+    try {
+        const { slideIds } = req.body;
+
+        if (!slideIds || !Array.isArray(slideIds)) {
+            return res.status(400).json({ message: "Slide IDs are required and must be an array." });
+        }
+
+        const slides = await Story.find({ 'slides._id': { $in: slideIds } }, { 'slides.$': 1 });
+
+        if (!slides || slides.length === 0) {
+            return res.status(404).json({ message: "No slides found for the provided IDs." });
+        }
+
+        const flattenedSlides = slides.flatMap(story => story.slides);
+
+        res.status(200).json({
+            message: "Slides fetched successfully.",
+            slides: flattenedSlides,
+        });
+    } catch (error) {
+        console.error("Error fetching slides by IDs:", error);
+        res.status(500).json({ message: "Server error. Please try again later.", error: error.message });
+    }
+};

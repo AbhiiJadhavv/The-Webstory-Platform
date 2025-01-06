@@ -12,7 +12,8 @@ const Bookmarks = () => {
   const { user, setUser } = useUser();
   const [showStory, setShowStory] = useState(false);
   const [addStory, setAddStory] = useState(false);
-  const [bookmarks, setBookmarks] = useState([]);
+  const [bookmarkIds, setBookmarkIds] = useState([]);
+  const [slides, setSlides] = useState([]);
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 780);
 
   useEffect(() => {
@@ -26,13 +27,13 @@ const Bookmarks = () => {
     };
   }, []);
 
+  // Fetch bookmark IDs
   useEffect(() => {
     if (user && user._id) {
       const fetchBookmarks = async () => {
         try {
           const response = await axios.get(`${STORY_API_END_POINT}/bookmarks/${user._id}`);
-          setBookmarks(response.data.bookmarks);
-          console.log("API Response:", response.data);
+          setBookmarkIds(response.data.bookmarks);
         } catch (error) {
           console.error("Error fetching bookmarks:", error);
         }
@@ -41,6 +42,24 @@ const Bookmarks = () => {
       fetchBookmarks();
     }
   }, [user]);
+
+  // Fetch slide details using bookmark IDs
+  useEffect(() => {
+    if (bookmarkIds.length > 0) {
+      const fetchSlides = async () => {
+        try {
+          const response = await axios.post(`${STORY_API_END_POINT}/slides/details`, {
+            slideIds: bookmarkIds,
+          });
+          setSlides(response.data.slides);
+        } catch (error) {
+          console.error("Error fetching slide details:", error);
+        }
+      };
+
+      fetchSlides();
+    }
+  }, [bookmarkIds]);
 
   return (
     <>
@@ -53,18 +72,22 @@ const Bookmarks = () => {
       {addStory && <AddStory setAddStory={setAddStory} />}
       <div className='bookmarksCon'>
         <p className='yourBookmarksPara'>Your Bookmarks</p>
-        {!bookmarks || bookmarks.length === 0 ? (
+        {!slides || slides.length === 0 ? (
           <p className='noBookmarksPara'>No Bookmarks Available</p>
         ) : (
           <div className='bookmarks'>
-            {bookmarks.map((bookmark) => (
-              <div className='homeStory' key={bookmark._id} style={{ backgroundImage: `url("${bookmark.url}")` }} >
-              <div className='homeStoryTopCon'></div>
-              <div className='homeStoryBottomCon'>
-                <p className='headingPara'>{bookmark.heading}</p>
-                <p className='descriptionPara'>{bookmark.description}</p>
+            {slides.map((slide) => (
+              <div
+                className='homeStory'
+                key={slide._id}
+                style={{ backgroundImage: `url("${slide.url}")` }}
+              >
+                <div className='homeStoryTopCon'></div>
+                <div className='homeStoryBottomCon'>
+                  <p className='headingPara'>{slide.heading}</p>
+                  <p className='descriptionPara'>{slide.description}</p>
+                </div>
               </div>
-            </div>
             ))}
           </div>
         )}
